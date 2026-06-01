@@ -13,8 +13,8 @@ OpenGL-exercise
 <img src="https://github.com/hougexxx/OpenGL-exercises/blob/edf7fe7adfb4964377cede0f568291c35a89026f/07%20Geometry/README_picture/geometry.png" width=40%>
 <img src="https://github.com/hougexxx/OpenGL-exercises/blob/edf7fe7adfb4964377cede0f568291c35a89026f/07%20Geometry/README_picture/geometry_1.png" width=40%>
 <br>
-<img src="https://github.com/hougexxx/OpenGL-exercises/blob/edf7fe7adfb4964377cede0f568291c35a89026f/07%20Geometry/README_picture/hello_sphere.png" width=40%>
-<img src="https://github.com/hougexxx/OpenGL-exercises/blob/edf7fe7adfb4964377cede0f568291c35a89026f/07%20Geometry/README_picture/hello_sphere2.png" width=40%>
+<img src="https://github.com/hougexxx/OpenGL-exercises/blob/4147d29c652e0c988bd64c4cea3338f0d6acf6e3/07%20Geometry/README_picture/hello_sphere.png" width=40%>
+<img src="https://github.com/hougexxx/OpenGL-exercises/blob/4147d29c652e0c988bd64c4cea3338f0d6acf6e3/07%20Geometry/README_picture/hello_sphere2.png" width=40%>
 
 
 其他内容如下：
