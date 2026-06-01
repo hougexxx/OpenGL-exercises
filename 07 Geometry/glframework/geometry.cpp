@@ -1,4 +1,5 @@
 #include "geometry.h"
+#include <vector>
 
 Geometry::Geometry() {
 
@@ -89,7 +90,94 @@ Geometry* Geometry::createBox( float size ){
 	return geometry;
 }
 
-Geometry* Geometry::createSphere( float size ){
+Geometry* Geometry::createSphere( float radius ){
 	Geometry* geometry = new Geometry();
+
+	//position   uv   indices
+	//1 声明主要变量
+	std::vector<GLfloat> positions{};
+	std::vector<GLfloat> uvs{};
+	std::vector<GLuint> indices{};
+
+	//声明经线和纬线的数量
+	int numLatLines = 60;
+	int numLongLines = 60;
+
+	//2 通过两层循环   位置   uv
+	for (int i = 0; i <= numLatLines; i++) {
+		for (int j = 0; j <= numLongLines; j++) {
+			float phi = i * glm::pi<float>() / numLatLines;
+			float theta = 2 * j * glm::pi<float>() / numLongLines;
+
+			float y = radius * cos(phi);
+			float x = radius * sin(phi) * cos(theta);
+			float z = radius * sin(phi) * sin(theta);
+
+			positions.push_back(x);
+			positions.push_back(y);
+			positions.push_back(z);
+
+			float u = 1.0 - (float)j / (float)numLongLines;
+			float v = 1.0 - (float)i / (float)numLatLines;
+
+			uvs.push_back(u);
+			uvs.push_back(v);
+		}
+	}
+
+	//3 通过两层循环    索引 
+	for (int i = 0; i < numLatLines; i++) {
+		for (int j = 0; j < numLongLines; j++) {
+			int p1 = i * (numLongLines+1)  +j;
+			int p2 = p1 + numLongLines + 1;
+			int p3 = p1 + 1;
+			int p4 = p2 + 1;
+
+			indices.push_back(p1);
+			indices.push_back(p2);
+			indices.push_back(p3);
+
+			indices.push_back(p3);
+			indices.push_back(p2);
+			indices.push_back(p4);
+
+		}
+	}
+
+	//4 生成   VBO   VAO
+	GLuint& posVbo = geometry->mPosVbo, uvVbo = geometry->mUvVbo;
+
+	glGenBuffers(1, &posVbo);
+	glBindBuffer(GL_ARRAY_BUFFER, posVbo);
+	glBufferData(GL_ARRAY_BUFFER, positions.size()*sizeof(float),positions.data(), GL_STATIC_DRAW);
+
+	glGenBuffers(1, &uvVbo);
+	glBindBuffer(GL_ARRAY_BUFFER, uvVbo);
+	glBufferData(GL_ARRAY_BUFFER, uvs.size()*sizeof(float), uvs.data(), GL_STATIC_DRAW);
+
+	glGenBuffers(1, &geometry->mEbo);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, geometry->mEbo);
+	//？？？为什么不能够用  sizeof(indices)
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size()*sizeof(GLuint), indices.data(), GL_STATIC_DRAW);
+	
+	glGenVertexArrays(1, &geometry->mVao);
+	glBindVertexArray(geometry->mVao);
+
+	//VAO  0   posVbo
+	glBindBuffer(GL_ARRAY_BUFFER, posVbo);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, (void*)0);
+
+	//VAO 1  uvVBO        vertex buffer
+	glBindBuffer(GL_ARRAY_BUFFER, uvVbo);
+	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, geometry->mEbo);
+	glBindVertexArray(0);
+
+	geometry->mIndicesCount = indices.size();
+
 	return geometry;
+
 }

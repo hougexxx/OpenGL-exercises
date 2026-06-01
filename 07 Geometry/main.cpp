@@ -32,7 +32,6 @@ void OnResize(int width, int height) {
 	std::cout << "OnResize" << std::endl;
 }
 
-
 void OnMouse(int button, int action, int mods) {
 	double x, y;
 	app->getCursorPostion(&x, &y);
@@ -56,7 +55,6 @@ void prepareCamera() {
 	camera = new PerspectiveCamera(glm::radians(60.0f), (float)app->getWidth() / (float)app->getHeight(), 1.0f, 1000.0f);
 	cameraControl = new TrackBallCameraControl();
 	cameraControl->setCamera(camera);
-
 }
 
 void prepareShader() {
@@ -68,7 +66,8 @@ void prepareTexture() {
 }
 
 void prepareVAO() {
-	geometry =  Geometry::createBox(0.5f);
+	//geometry =  Geometry::createBox(0.02f);
+	geometry = Geometry::createSphere(0.02f);
 }
 
 void prepareState() {
