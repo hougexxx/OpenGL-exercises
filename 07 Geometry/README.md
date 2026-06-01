@@ -5,13 +5,16 @@ OpenGL-exercise
 - 主要内容是进行camera的练习。
 
 目的：geometry  几何体 练习  
-新建一个geometry类，可以创建立方体，给予立方体的边长，利用边长生成mesh的VBO数据。最后完成几何体数据的封装。
+新建一个geometry类. <br>
+- 可以创建立方体，给予立方体的边长，利用边长生成mesh的VBO数据，VAO数据。
+- 可以创建球体，给予球体半径，利用球体的经纬线生成mesh的VBO数据，VAO数据。
 
 图示：<br>
 <img src="https://github.com/hougexxx/OpenGL-exercises/blob/edf7fe7adfb4964377cede0f568291c35a89026f/07%20Geometry/README_picture/geometry.png" width=40%>
 <img src="https://github.com/hougexxx/OpenGL-exercises/blob/edf7fe7adfb4964377cede0f568291c35a89026f/07%20Geometry/README_picture/geometry_1.png" width=40%>
-
-
+<br>
+<img src="https://github.com/hougexxx/OpenGL-exercises/blob/edf7fe7adfb4964377cede0f568291c35a89026f/07%20Geometry/README_picture/hello_sphere.png" width=40%>
+<img src="https://github.com/hougexxx/OpenGL-exercises/blob/edf7fe7adfb4964377cede0f568291c35a89026f/07%20Geometry/README_picture/hello_sphere2.png" width=40%>
 
 
 其他内容如下：
